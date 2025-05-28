@@ -17,19 +17,18 @@ export const goodsFromServer = [
 
 export const App: React.FC = () => {
   const [sortField, setSortField] = useState('');
-  const [goods, setGoods] = useState(goodsFromServer);
   const [reversed, setReversed] = useState(false);
 
-  let visibleGoods = [...goods];
+  const visibleGoods = [...goodsFromServer];
 
   if (sortField === 'alphabetical') {
-    visibleGoods = [...visibleGoods].sort((a, b) => a.localeCompare(b));
+    visibleGoods.sort((a, b) => a.localeCompare(b));
   } else if (sortField === 'length') {
-    visibleGoods = [...visibleGoods].sort((a, b) => a.length - b.length);
+    visibleGoods.sort((a, b) => a.length - b.length);
   }
 
   if (reversed) {
-    visibleGoods = [...visibleGoods].reverse();
+    visibleGoods.reverse();
   }
 
   return (
@@ -64,7 +63,6 @@ export const App: React.FC = () => {
             type="button"
             className="button is-danger is-light"
             onClick={() => {
-              setGoods(goodsFromServer);
               setSortField('');
               setReversed(false);
             }}
